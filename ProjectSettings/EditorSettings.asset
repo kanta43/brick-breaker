@@ -3,22 +3,32 @@
 --- !u!159 &1
 EditorSettings:
   m_ObjectHideFlags: 0
+<<<<<<< HEAD
   serializedVersion: 15
+=======
+  serializedVersion: 11
+  m_ExternalVersionControlSupport: Visible Meta Files
+>>>>>>> c2d241395635f4ca4a84012a7c8670599ad2d3e3
   m_SerializationMode: 2
   m_LineEndingsForNewScripts: 0
   m_DefaultBehaviorMode: 0
   m_PrefabRegularEnvironment: {fileID: 0}
   m_PrefabUIEnvironment: {fileID: 0}
   m_SpritePackerMode: 0
+<<<<<<< HEAD
   m_SpritePackerCacheSize: 10
   m_SpritePackerPaddingPower: 1
   m_Bc7TextureCompressor: 0
+=======
+  m_SpritePackerPaddingPower: 1
+>>>>>>> c2d241395635f4ca4a84012a7c8670599ad2d3e3
   m_EtcTextureCompressorBehavior: 1
   m_EtcTextureFastCompressor: 1
   m_EtcTextureNormalCompressor: 2
   m_EtcTextureBestCompressor: 4
   m_ProjectGenerationIncludedExtensions: txt;xml;fnt;cd;asmdef;rsp;asmref
   m_ProjectGenerationRootNamespace: 
+<<<<<<< HEAD
   m_EnableTextureStreamingInEditMode: 1
   m_EnableTextureStreamingInPlayMode: 1
   m_EnableEditorAsyncCPUTextureLoading: 0
@@ -48,3 +58,15 @@ EditorSettings:
   m_EnableEnlightenBakedGI: 0
   m_ReferencedClipsExactNaming: 1
   m_ForceAssetUnloadAndGCOnSceneLoad: 1
+=======
+  m_CollabEditorSettings:
+    inProgressEnabled: 1
+  m_EnableTextureStreamingInEditMode: 1
+  m_EnableTextureStreamingInPlayMode: 1
+  m_AsyncShaderCompilation: 1
+  m_EnterPlayModeOptionsEnabled: 0
+  m_EnterPlayModeOptions: 3
+  m_ShowLightmapResolutionOverlay: 1
+  m_UseLegacyProbeSampleCount: 0
+  m_SerializeInlineMappingsOnOneLine: 1
+>>>>>>> c2d241395635f4ca4a84012a7c8670599ad2d3e3
