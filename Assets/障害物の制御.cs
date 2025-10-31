@@ -26,6 +26,12 @@ public class 障害物の制御 : MonoBehaviour
 
     void Update()
     {
+        // ゲームがアクティブでない（ゲームクリア/オーバー）なら移動処理をスキップ
+        if (!GameManager.isGameActive)
+        {
+            return;
+        }
+        
         // 時間に応じた移動の進行度を計算
         // Mathf.Sin() は -1 から 1 の間で変化し、往復移動に適しています
         float progress = Mathf.Sin(Time.time * speed);

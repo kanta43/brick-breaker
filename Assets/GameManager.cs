@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // ゲームが実行中かどうかを示す静的フラグ
+    public static bool isGameActive = true; 
+
     public Block[] blocks;
     public GameObject gameOverUI;
     public GameObject gameClearUI;
@@ -15,7 +18,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // シーン開始時はゲームをアクティブにする
+        isGameActive = true; 
     }
 
     // Update is called once per frame
@@ -33,6 +37,9 @@ public class GameManager : MonoBehaviour
                 gameClearUI.SetActive(true);
                 // ゲームクリアのフラグをtrueにする
                 isGameClear = true;
+                
+                // ゲームクリア時にフラグをfalseにする
+                isGameActive = false; 
             }
 
 
@@ -63,12 +70,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("ゲームオーバー");
         // ゲームオーバーUIを表示
         gameOverUI.SetActive(true);
+
+        // ゲームオーバー時にフラグをfalseにする
+        isGameActive = false; 
     }
 
     // リトライボタンが押されたとき
     public void GameRetry()
     {
-        // "game"をリロードする
-        SceneManager.LoadScene("game");
+        // "Game Scene"をリロードする
+        SceneManager.LoadScene("Game Scene");
     }
 }

@@ -16,6 +16,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ゲームが開始されていない（カウントダウン中）なら、移動処理をスキップ
+        if (!GameStarter.isGameStarted)
+        {
+            return;
+        }
+        
         // 左矢印キーが押されたら
         if (Input.GetKey(KeyCode.LeftArrow))
         {
