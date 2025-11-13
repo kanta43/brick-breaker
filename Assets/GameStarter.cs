@@ -1,16 +1,19 @@
+// GameStarter.cs の修正案 (抜粋)
 using UnityEngine;
-using TMPro; // TextMeshProを使うために必要
-using System.Collections; // コルーチンを使うために必要
+using TMPro; 
+using System.Collections; 
 
 public class GameStarter : MonoBehaviour
 {
     // 他のスクリプトからゲーム開始状態を参照するための静的変数
     public static bool isGameStarted = false; 
 
-    // Unityエディタから設定できるようにpublicにする (TextMeshProUGUI型に修正)
     public TextMeshProUGUI countdownText; 
     public Ball gameBall; // Ballクラスへの参照
     public int countdownTime = 3; // カウントダウンの初期秒数
+    
+    // --- 再スタート用の変数 ---
+    private readonly int initialCountdownTime = 3; // カウントダウンの初期値
 
     void Start()
     {
@@ -20,19 +23,38 @@ public class GameStarter : MonoBehaviour
         // カウントダウン処理を開始
         StartCoroutine(CountdownToStart()); 
     }
+    
+    // ライフ減少時にGameManagerから呼び出される再スタート処理
+    public IEnumerator ResetAndRestartBall()
+    {
+        isGameStarted = false; // ボールの再発射までプレイヤー操作を止める
+        
+        // ボールを初期位置に戻す
+        gameBall.ResetBallPosition();
+        
+        // カウントダウンテキストを表示
+        countdownText.gameObject.SetActive(true);
+        
+        // カウントダウンコルーチンを実行
+        yield return StartCoroutine(CountdownToStart());
+    }
+
 
     IEnumerator CountdownToStart()
     {
+        // カウントダウンタイマーを初期値に戻す
+        int count = initialCountdownTime; 
+
         // 3から1までカウントダウン
-        while (countdownTime > 0)
+        while (count > 0)
         {
             // UIに秒数を表示
-            countdownText.text = countdownTime.ToString(); 
+            countdownText.text = count.ToString(); 
             
             // 1秒間待機
             yield return new WaitForSeconds(1f); 
 
-            countdownTime--;
+            count--;
         }
 
         // カウントダウン終了

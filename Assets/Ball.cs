@@ -1,3 +1,4 @@
+// Ball.cs の修正案
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +8,31 @@ public class Ball : MonoBehaviour
     public float speed = 1.0f;
     private Rigidbody myRigid;
     public GameManager myManager;
+    
+    // --- 【追加】初期位置を保持する変数 ---
+    private Vector3 initialPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         // このゲームオブジェクトについているRigidbodyコンポーネントを取得し、それをmyRigidという変数に入れる
         myRigid = this .GetComponent<Rigidbody>();
-        // ここでの発射処理は削除。StartBall()で呼び出す
-        // myRigid.AddForce((transform.forward + transform.right) * speed, ForceMode.VelocityChange);   
+        // 初期位置を保存
+        initialPosition = transform.position;
+    }
+    
+    // ボールを初期位置に戻すメソッド
+    public void ResetBallPosition()
+    {
+        // 速度をリセット
+        myRigid.linearVelocity = Vector3.zero;
+        myRigid.angularVelocity = Vector3.zero;
+        
+        // 位置を初期位置に戻す
+        transform.position = initialPosition;
+        
+        // ボールが見えるように再アクティブ化
+        this.gameObject.SetActive(true);
     }
 
     // GameStarterから呼び出され、ボールを発射するメソッド
@@ -45,11 +63,13 @@ public class Ball : MonoBehaviour
         // 衝突したゲームオブジェクトのタグが"Finish"ならば
         if( Collision.gameObject.tag == "Finish")
         {
-             // このオブジェクトを壊す
-             Destroy(this.gameObject);
-             // ゲームオーバー処理を実行する関数を呼び出す
-             myManager.GameOver();
+             // ボールを非アクティブにする（破壊すると再生成が面倒なため）
+             this.gameObject.SetActive(false);
+             
+             // ゲームマネージャーにライフを減らすよう伝える
+             myManager.LoseLife();
+             
+             // 元々あったDestroy(this.gameObject)とmyManager.GameOver()は削除
         }
     }
-
 }
